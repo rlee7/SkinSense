@@ -1,2 +1,2 @@
 # azure-skinsense
-The skin detection app completely for free using Microsoft Azure and Android 
+SkinSense - A Hackathon Project for TechNight 2019.

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/logo"
+                android:layout_width="71dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="140dp"
+                android:contentDescription="Logo for SkinSense"
+                android:scaleType="fitXY"
+                app:layout_constraintLeft_toLeftOf="@id/company_title_1"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@mipmap/ic_launcher" />
+
+            <TextView
+                android:id="@+id/company_title_1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="48dp"
+                android:layout_marginRight="48dp"
+                android:text="@string/skin_title"
+                android:textSize="32sp"
+                android:textStyle="bold"
+                android:typeface="serif"
+                app:fontFamily="sans-serif-medium"
+                app:layout_constraintEnd_toStartOf="@+id/logo"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/company_title_2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="48dp"
+                android:layout_marginLeft="48dp"
+                android:layout_marginTop="16dp"
+                android:text="@string/sense_title2"
+                android:textSize="32sp"
+                android:textStyle="bold"
+                android:typeface="serif"
+                app:fontFamily="sans-serif-medium"
+                app:layout_constraintStart_toEndOf="@+id/logo"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.appcompat.widget.Toolbar>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/navigation"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="92dp"
+        android:background="?android:attr/windowBackground"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/prob_layout"
+        app:menu="@menu/navigation" />
+</androidx.constraintlayout.widget.ConstraintLayout>

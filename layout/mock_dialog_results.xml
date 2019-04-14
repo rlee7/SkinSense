@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/logo"
+                android:layout_width="71dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="140dp"
+                android:contentDescription="Logo for SkinSense"
+                android:scaleType="fitXY"
+                app:layout_constraintLeft_toLeftOf="@id/company_title_1"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@mipmap/ic_launcher" />
+
+            <TextView
+                android:id="@+id/company_title_1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="48dp"
+                android:layout_marginRight="48dp"
+                android:text="@string/skin_title"
+                android:textSize="32sp"
+                android:textStyle="bold"
+                android:typeface="serif"
+                app:fontFamily="sans-serif-medium"
+                app:layout_constraintEnd_toStartOf="@+id/logo"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/company_title_2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="48dp"
+                android:layout_marginLeft="48dp"
+                android:layout_marginTop="16dp"
+                android:text="@string/sense_title2"
+                android:textSize="32sp"
+                android:textStyle="bold"
+                android:typeface="serif"
+                app:fontFamily="sans-serif-medium"
+                app:layout_constraintStart_toEndOf="@+id/logo"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.appcompat.widget.Toolbar>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/prob_layout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="84dp">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="219dp"
+            android:layout_height="202dp"
+            android:layout_marginTop="36dp"
+            android:cropToPadding="true"
+            android:scaleType="fitXY"
+            app:layout_constraintTop_toBottomOf="@+id/list_disease"
+            app:srcCompat="@drawable/skin_image"
+            tools:layout_editor_absoluteX="96dp" />
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cancer Probabilities"
+            android:textColor="@android:color/black"
+            android:textSize="26sp"
+            android:typeface="serif"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ListView
+            android:id="@+id/prob_list_disease"
+            style="@style/Widget.AppCompat.ListView"
+            android:layout_width="229dp"
+            android:layout_height="wrap_content"
+            android:dividerHeight="2dp"
+            android:entries="@array/probabilities"
+            android:scrollbars="vertical"
+            tools:layout_editor_absoluteX="247dp"
+            tools:layout_editor_absoluteY="32dp"></ListView>
+
+        <ListView
+            android:id="@+id/list_disease"
+            style="@style/Widget.AppCompat.ListView"
+            android:layout_width="239dp"
+            android:layout_height="wrap_content"
+            android:dividerHeight="2dp"
+            android:entries="@array/responses"
+            android:scrollbars="vertical"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/title">
+
+        </ListView>
+
+        <TextView
+            android:id="@+id/text_desc"
+            android:layout_width="wrap_content"
+            android:layout_height="55dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="20dp"
+            android:lineSpacingExtra="8sp"
+            android:text="There is a high probabiliity that you have Squamous Cell Caricinoma. It is recommended to see a dermatologist."
+            android:textColor="@android:color/black"
+            android:textSize="14sp"
+            android:typeface="serif"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/imageView" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/navigation"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="92dp"
+        android:background="?android:attr/windowBackground"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/prob_layout"
+        app:menu="@menu/navigation" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

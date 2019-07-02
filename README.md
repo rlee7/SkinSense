@@ -9,6 +9,6 @@ To use SkinSense, import the project into Android Studio then run it.
 <p>You take a picture of your skin using the native mobile application, then the picture is sent to my secure cloud server on Azure, where the Azure Machine Learning Service can classify the image by comparing its color and frequency of certain distinctive features of diseased skin to your skin, and finally, the output is sent back to the app where you will receive the probability of having each type of skin cancer. There is also the history tab, which displays your past uploads, and the medical profile tab, which allows you to check the symptoms you have from a drop-down menu.</p>
 
 # How it was built
-<p>We used Android Studio for the application, Azure for the machine learning and cloud servers, and Kaggle for the database of images to train the machine learning algorithm.</p>
+<p>SkinSense uses Android Studio for the application, Azure for the machine learning and cloud servers, Android Volley for the HTTP requests to the Azure Machine Learning Service, and Kaggle for the database of images to train the machine learning algorithm.</p>
 
 

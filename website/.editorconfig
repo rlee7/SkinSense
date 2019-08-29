@@ -1,0 +1,8 @@
+root = false
+
+# maintain consistent (simple) coding stle for this subdirectory
+[*]
+insert_final_newline = true
+indenx_style = space
+indent_size = 2
+

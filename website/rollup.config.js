@@ -2,7 +2,7 @@ import resolve from "rollup-plugin-node-resolve";
 import commonjs from "rollup-plugin-commonjs";
 import serve from "rollup-plugin-serve";
 import livereload from "rollup-plugin-livereload";
-import postcss from 'rollup-plugin-postcss'
+import postcss from "rollup-plugin-postcss";
 
 export default {
   input: "src/main.js",

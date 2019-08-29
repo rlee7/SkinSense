@@ -1,3 +1,5 @@
 import "./style.css";
 
-console.log("started");
+document.querySelector("button").addEventListener("click", e => {
+  console.log("button clicked");
+});

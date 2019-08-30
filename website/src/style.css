@@ -2,19 +2,39 @@
   margin: 0;
   padding: 0;
   border: 0 none;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'IBM Plex Sans', Arial, Helvetica, sans-serif;
   color: #212529;
 }
 
 html, body {
   height: 100%;
   width: 100%;
-  background-color: #f8f9fa;
+  background: linear-gradient(-45deg, rgba(85, 88, 218, 0.5), rgba(95, 209, 249, 0.5));
+  background-size: 200% 200%;
+  animation: blue-gradient-background 15s ease 0s infinite alternate both;
+  transition: all 100ms ease-in-out;
 }
+
+@keyframes blue-gradient-background {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+}
+
 
 h1, h2, p {
   line-height: 150%;
   text-align: center;
+}
+
+h2 {
+  font-size: 1.2rem;
 }
 
 main {
@@ -22,35 +42,61 @@ main {
   width: 80%;
   min-width: 300px;
   max-width: 600px;
+
   margin: 0 auto;
+
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
 }
 
+main > *:first-child {
+  margin-bottom: 40px;
+}
+
+.background {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+
+  background: #495057;
+  border-radius: 10px;
+  opacity: 0.15;
+  box-shadow: 2px 2px 4px #343a40;
+}
+
+article {
+  position: relative;
+  padding: 15px;
+}
+
 button {
-  margin: 20px;
-  padding: 5px;
+  position: relative;
+  padding: 15px;
+
   display: flex;
   align-items: center;
-  background-color: #e9ecef;
-  border-radius: 5px;
-  box-shadow: 2px 2px 4px #ced4da;
-  transition: transform 0.15s ease-in-out;
-}
+  justify-content: center;
+  flex-direction: column;
 
-button:hover {
   cursor: pointer;
-  transform: scale(1.1, 1.1);
-  transition: transform 0.15s ease-in-out;
+  background: inherit;
+
+  transition: transform 0.10s ease-in-out;
 }
 
-button:active {
-  transform: scale(1.07, 1.07);
-  transition: transform 0.04s ease-in-out;
+svg {
+  opacity: 0.7;
+  transition: all 100ms ease-in-out;
 }
 
-button > * {
-  padding: 5px;
+button:hover svg {
+  transition: all 100ms ease-in-out;
+}
+
+input {
+  display: none;
 }

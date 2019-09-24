@@ -1,17 +1,22 @@
 {
   "name": "website",
+  "private": true,
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "serve": "rollup --watch -c"
+    "serve": "rollup --watch -c",
+    "build": "rollup -c"
   },
   "license": "MIT",
   "devDependencies": {
     "rollup": "^1.20.3",
+    "rollup-plugin-babel-minify": "^9.1.0",
     "rollup-plugin-commonjs": "^10.1.0",
+    "rollup-plugin-copy": "^3.1.0",
+    "rollup-plugin-css-porter": "^1.0.2",
     "rollup-plugin-livereload": "^1.0.1",
     "rollup-plugin-node-resolve": "^5.2.0",
     "rollup-plugin-postcss": "^2.0.3",
-    "rollup-plugin-serve": "^1.0.1"
+    "rollup-plugin-serve-proxy": "^1.1.4"
   }
 }

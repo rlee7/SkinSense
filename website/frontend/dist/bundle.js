@@ -1,0 +1,2 @@
+(function(a,b,c,d){c=a.createElement(b),c.async=1,c.src="//"+(location.host||"localhost").split(":")[0]+":35729/livereload.js?snipver=1",d=a.getElementsByTagName(b)[0],d.parentNode.insertBefore(c,d)})(document,"script"),function(){'use strict';const a=document.querySelector("button"),b=document.querySelector("input");a.addEventListener("click",()=>b.click()),b.addEventListener("click",()=>{const a=document.querySelector("input").files[0];console.log(a),window.fetch("/api/process",{method:"GET"}).then(()=>{console.log("test")})},!1)}();
+//# sourceMappingURL=bundle.js.map

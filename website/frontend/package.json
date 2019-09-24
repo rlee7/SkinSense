@@ -4,11 +4,12 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "serve": "rollup --watch -c",
-    "build": "rollup -c"
+    "serve": "cross-env NODE_ENV=development rollup --watch -c",
+    "build": "cross-env NODE_ENV=production rollup -c"
   },
   "license": "MIT",
   "devDependencies": {
+    "cross-env": "^6.0.0",
     "rollup": "^1.20.3",
     "rollup-plugin-babel-minify": "^9.1.0",
     "rollup-plugin-commonjs": "^10.1.0",

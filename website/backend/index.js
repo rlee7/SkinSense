@@ -1,16 +1,21 @@
 import fs from "fs";
 import http from "http";
 import dotenv from "dotenv";
+import Busboy from "busboy";
 
+// setup
 dotenv.config();
 
+// utility fns
+let getDateString = d => `${d.getFullYear()}/${d.getMonth()}/${d.getDate()} ${d.getUTCHours()}:${d.getUTCMinutes()}:${d.getUTCSeconds()} (UTC)`;
+
+// server
 const server = http.createServer();
 
 server.on("request", (req, res) => {
   const { url } = req;
   
-  const d = new Date();
-  const dateString = `${d.getFullYear()}/${d.getMonth()}/${d.getDate()} ${d.getUTCHours()}:${d.getUTCMinutes()}:${d.getUTCSeconds()} (UTC)`
+  const dateString = getDateString(new Date()); 
   console.log(`request for ${url} at ${dateString} by ${req.connection.remoteAddress}`);
 
   if(url === "/" || url === "/index.html") {
@@ -33,11 +38,32 @@ server.on("request", (req, res) => {
     res.setHeader("Content-Type", "text/octet-stream");
     fs.createReadStream("public/bundle.js.map", "utf8").pipe(res);
   }
+  else if(url === "/upload") {
+    const busboy = new Busboy({ headers: req.headers });
+
+    busboy.on("file", (fieldname, file, filename, encoding, mimetype) => {
+      const dateString2 = getDateString(new Date());
+      console.log(`upload of ${filename} with ${encoding} as ${mimetype} at ${dateString2} by ${req.connection.remoteAddress}`)
+      
+      file.pipe(fs.createWriteStream("./image.jpg"));
+    });
+
+    busboy.on("finish", () => {
+      res.statusCode = 303;
+      res.setHeader("Connection", "close");
+      res.setHeader("Location", "/");
+      res.end();
+    });
+    
+    req.pipe(busboy);
+  }
   else if(url === "/api/process") {
-    console.log("crap");
     res.setHeader("Content-Type", "text/plain");
     res.write("back", "utf8");
     res.end(" for more", "utf8");
+  }
+  else {
+    console.log("NOT SATISFIED");
   }
 });
 

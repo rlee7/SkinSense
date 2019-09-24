@@ -1,17 +1,26 @@
-import "./style.css";
+import "./style.css"
 
 const btn = document.querySelector("button");
 const input = document.querySelector("input");
 
 btn.addEventListener("click", () => input.click());
-input.addEventListener("click", () => {
-  const fileList = document.querySelector("input").files[0];
-  console.log(fileList);
+input.addEventListener("change", e => {
+  e.preventDefault();
 
-  window.fetch("/api/process", {
-    method: "GET"
-  }, )
+  const formData = (() => {
+    const fileList = input.files[0];
+
+    const fd = new FormData();
+    fd.append("file", fileList);
+    return fd;
+  })();
+
+  fetch("/upload", {
+    method: "POST",
+    body: formData
+  })
     .then(res => {
-      console.log("test");
+      console.log(res);
     })
+
 }, false);

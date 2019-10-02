@@ -1,3 +1,5 @@
 node_modules/
 backend/public/
 frontend/dist/
+image.png
+.env

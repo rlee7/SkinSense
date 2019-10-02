@@ -55,11 +55,11 @@ server.on("request", (req, res) => {
       res.setHeader("Location", "/");
       res.end();
 
-      axios.post("https://vision.googleapis.com/v1/images:annotate", {
-        requests: [
+      axios.post(`https://vision.googleapis.com/v1/images:annotate?key=${process.env.KEY}`, {
+        requests: [ 
           {
             image: {
-              content: fs.readFileSync("./image.jpg"),
+              content: fs.readFileSync("./image.jpg", "utf8"),
             },
             features: [
               {
@@ -75,6 +75,7 @@ server.on("request", (req, res) => {
         })
         .catch(err => {
           console.log(err);
+          fs.writeFileSync("file", err, "utf8");
         });
     });
     

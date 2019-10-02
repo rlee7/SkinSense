@@ -2,6 +2,7 @@ import fs from "fs";
 import http from "http";
 import dotenv from "dotenv";
 import Busboy from "busboy";
+import axios from "axios";
 
 // setup
 dotenv.config();
@@ -53,6 +54,28 @@ server.on("request", (req, res) => {
       res.setHeader("Connection", "close");
       res.setHeader("Location", "/");
       res.end();
+
+      axios.post("https://vision.googleapis.com/v1/images:annotate", {
+        requests: [
+          {
+            image: {
+              content: fs.readFileSync("./image.jpg"),
+            },
+            features: [
+              {
+                type: "LABEL_DETECTION",
+                maxResults: 10
+              }
+            ]
+          }
+        ]
+      })
+        .then(res => {
+          console.log("send image");
+        })
+        .catch(err => {
+          console.log(err);
+        });
     });
     
     req.pipe(busboy);

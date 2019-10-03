@@ -53,50 +53,49 @@ server.on("request", (req, res) => {
       res.end();
 
 
-    process.nextTick(() => {
-      const f = fs.readFileSync("./image.jpg", "utf8");
-      const img = Buffer.from(f).toString("base64");
-      const d = {
-        requests: [ 
-          {
-            image: {
-              content: img,
-            },
-            features: [
-              {
-                type: "LABEL_DETECTION",
-                maxResults: 10
-              }
-            ]
+      process.nextTick(() => {
+        const f = fs.readFileSync("./image.jpg", "utf8");
+        const img = Buffer.from(f).toString("base64");
+        const d = {
+          requests: [ 
+            {
+              image: {
+                content: img,
+              },
+              features: [
+                {
+                  type: "LABEL_DETECTION",
+                  maxResults: 10
+                }
+              ]
+            }
+          ]
+        };
+
+        // axios.post(`https://vision.googleapis.com/v1/images:annotate?key=${process.env.KEY}`, d, {
+        //   "Content-Type": "application/json"
+        // })
+        //   .then(res => {
+        //     console.log("send image");
+        //   })
+        //   .catch(err => {
+        //     // console.log(err);      console.log(f);
+        //     console.log("ERROR")
+        //     fs.writeFileSync("file", err, "utf8");
+        //   });
+
+        fetch(`https://vision.googleapis.com/v1/images:annotate?key=${process.env.KEY}`, {
+          method: "POST",
+          body: d,
+          headers: {
+            'Content-Type': 'application/json'
           }
-        ]
-      };
-
-      // axios.post(`https://vision.googleapis.com/v1/images:annotate?key=${process.env.KEY}`, d, {
-      //   "Content-Type": "application/json"
-      // })
-      //   .then(res => {
-      //     console.log("send image");
-      //   })
-      //   .catch(err => {
-      //     // console.log(err);      console.log(f);
-      //     console.log("ERROR")
-      //     fs.writeFileSync("file", err, "utf8");
-      //   });
-
-      fetch(`https://vision.googleapis.com/v1/images:annotate?key=AIzaSyA-woXwz-y1KulmMzjZu8ZV-xSbD3SCQ6A}`, {
-        method: "POST",
-        body: d,
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      })
-        .then(res => {
-          console.log(res);
         })
+          .then(res => {
+            console.log(res);
+          })
       });
     });
-      
     
     req.pipe(busboy);
   }

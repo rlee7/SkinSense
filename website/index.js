@@ -3,6 +3,8 @@ import http from "http";
 import dotenv from "dotenv";
 import Busboy from "busboy";
 import axios from "axios";
+import fetch from "node-fetch";
+import { Buffer } from "safe-buffer";
 
 // setup
 dotenv.config();
@@ -24,20 +26,15 @@ server.on("request", (req, res) => {
     res.setHeader("Content-Type", "text/html");
     fs.createReadStream("public/index.html", "utf8").pipe(res);
   }
-  else if(url === "/bundle.css") {
+  else if(url === "/style.css") {
     res.statusCode = 200;
     res.setHeader("Content-Type", "text/css");
-    fs.createReadStream("public/bundle.css", "utf8").pipe(res);
+    fs.createReadStream("public/style.css", "utf8").pipe(res);
   }
-  else if(url === "/bundle.js") {
+  else if(url === "/main.js") {
     res.statusCode = 200;
     res.setHeader("Content-Type", "text/javascript");
-    fs.createReadStream("public/bundle.js", "utf8").pipe(res);
-  }
-  else if(url === "/bundle.js.map") {
-    res.statusCode = 200;
-    res.setHeader("Content-Type", "text/octet-stream");
-    fs.createReadStream("public/bundle.js.map", "utf8").pipe(res);
+    fs.createReadStream("public/main.js", "utf8").pipe(res);
   }
   else if(url === "/upload") {
     const busboy = new Busboy({ headers: req.headers });
@@ -55,11 +52,15 @@ server.on("request", (req, res) => {
       res.setHeader("Location", "/");
       res.end();
 
-      axios.post(`https://vision.googleapis.com/v1/images:annotate?key=${process.env.KEY}`, {
+
+    process.nextTick(() => {
+      const f = fs.readFileSync("./image.jpg", "utf8");
+      const img = Buffer.from(f).toString("base64");
+      const d = {
         requests: [ 
           {
             image: {
-              content: fs.readFileSync("./image.jpg", "utf8"),
+              content: img,
             },
             features: [
               {
@@ -69,15 +70,33 @@ server.on("request", (req, res) => {
             ]
           }
         ]
+      };
+
+      // axios.post(`https://vision.googleapis.com/v1/images:annotate?key=${process.env.KEY}`, d, {
+      //   "Content-Type": "application/json"
+      // })
+      //   .then(res => {
+      //     console.log("send image");
+      //   })
+      //   .catch(err => {
+      //     // console.log(err);      console.log(f);
+      //     console.log("ERROR")
+      //     fs.writeFileSync("file", err, "utf8");
+      //   });
+
+      fetch(`https://vision.googleapis.com/v1/images:annotate?key=AIzaSyA-woXwz-y1KulmMzjZu8ZV-xSbD3SCQ6A}`, {
+        method: "POST",
+        body: d,
+        headers: {
+          'Content-Type': 'application/json'
+        }
       })
         .then(res => {
-          console.log("send image");
+          console.log(res);
         })
-        .catch(err => {
-          console.log(err);
-          fs.writeFileSync("file", err, "utf8");
-        });
+      });
     });
+      
     
     req.pipe(busboy);
   }
@@ -87,7 +106,7 @@ server.on("request", (req, res) => {
     res.end(" for more", "utf8");
   }
   else {
-    console.log("NOT SATISFIED");
+    console.log(`$url} NOT SATISFIED`);
   }
 });
 

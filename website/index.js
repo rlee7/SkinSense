@@ -100,13 +100,8 @@ server.on("request", (req, res) => {
     
     req.pipe(busboy);
   }
-  else if(url === "/api/process") {
-    res.setHeader("Content-Type", "text/plain");
-    res.write("back", "utf8");
-    res.end(" for more", "utf8");
-  }
   else {
-    console.log(`$url} NOT SATISFIED`);
+    console.log(`${url} NOT SATISFIED`);
   }
 });
 
